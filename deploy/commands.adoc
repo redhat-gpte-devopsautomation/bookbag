@@ -1,7 +1,9 @@
 To create a Bookbag instance:
 
+Assuming `RESOURCE_CLAIM=gpte.babylon-empty-config.prod-vwxyz':
+
 ----
-$ oc process -f bookbag-template.yaml -p GUID=0004 -p IMAGE_PULL_POLICY=Always -p IMAGE=quay.io/panni/ocp4-disconnected-install:v0.1.3 | oc apply -f -
+$ oc process -f bookbag-template.yaml -p SUFFIX="${RESOURCE_CLAIM: -5}" -p RESOURCE_CLAIM="${RESOURCE_CLAIM}" -p IMAGE_PULL_POLICY=Always -p IMAGE=quay.io/panni/ocp4-disconnected-install:v0.1.3 | oc apply -f -
 ----
 
 To apply the updated ConfigMap:
