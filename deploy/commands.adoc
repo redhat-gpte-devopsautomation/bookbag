@@ -1,0 +1,19 @@
+To create a Bookbag instance:
+
+----
+$ oc process -f bookbag-template.yaml -p GUID=0004 -p IMAGE_PULL_POLICY=Always -p IMAGE=quay.io/panni/ocp4-disconnected-install:v0.1.3 | oc apply -f -
+----
+
+To apply the updated ConfigMap:
+
+----
+$ oc apply -f sample-cm.yaml
+----
+
+To restart the Deployment after that:
+
+----
+$ kubectl rollout restart deployment bookbag-0004
+----
+
+
