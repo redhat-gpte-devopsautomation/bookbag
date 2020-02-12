@@ -1,0 +1,16 @@
+Here is some important information about your environment:
+
+You can access your bastion via SSH:
+ssh nstephan-redhat.com@bastion.d904.blue.osp.opentlc.com
+
+Make sure you use the username 'nstephan-redhat.com' and the password 'Fkjy8t6TETW6' when prompted.
+
+Your base domain is 'blue.osp.opentlc.com'
+
+For reference, the floating IPs you will use for OpenShift are:
+
+API IP: 52.116.95.85
+API FQDN: api.d904.blue.osp.opentlc.com
+
+Ingress IP: 52.116.95.39
+Ingress FQDN: *.apps.d904.blue.osp.opentlc.com

@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  ssh_command: "ssh nstephan-redhat.com@bastion.d904.blue.osp.opentlc.com"
+  ssh_user: "nstephan-redhat.com"
+  ssh_password: "Fkjy8t6TETW6"
+  base_domain: "blue.osp.opentlc.com"
+  api_ip: "52.116.95.85"
+  api_fqdn: "api.d904.blue.osp.opentlc.com"
+  ingress_ip: "52.116.95.39"
+  ingress_fqdn: "*.apps.d904.blue.osp.opentlc.com"
+kind: ConfigMap
+metadata:
+  labels:
+    app: bookbag-0004
+  name: bookbag-0004-userinfo
