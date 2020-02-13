@@ -34,7 +34,6 @@ objects:
   metadata:
     labels:
       app: ${NAME}-${SUFFIX}
-      poolboy.gpte.redhat.com/resource-claim: ${RESOURCE_CLAIM}
     name: ${NAME}-${SUFFIX}
   spec:
     progressDeadlineSeconds: 600
@@ -202,6 +201,7 @@ objects:
   metadata:
     labels:
       app: ${NAME}-${SUFFIX}
+      poolboy.gpte.redhat.com/resource-claim: ${RESOURCE_CLAIM}
     name: ${NAME}-${SUFFIX}
   spec:
     port:
@@ -236,7 +236,6 @@ objects:
   metadata:
     labels:
       app: ${NAME}-${SUFFIX}
-      poolboy.gpte.redhat.com/resource-claim: ${RESOURCE_CLAIM}
     name: ${NAME}-${SUFFIX}-userinfo
 parameters:
 - name: NAME
