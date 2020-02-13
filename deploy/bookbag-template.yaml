@@ -223,15 +223,7 @@ objects:
       app: ${NAME}-${SUFFIX}
     name: ${NAME}-${SUFFIX}-env
 - apiVersion: v1
-  data:
-    ssh_command: "waiting..."
-    ssh_user: "waiting..."
-    ssh_password: "waiting..."
-    base_domain: "waiting..."
-    api_ip: "waiting..."
-    api_fqdn: "waiting..."
-    ingress_ip: "waiting..."
-    ingress_fqdn: "waiting..."
+  data: ${{USERINFO_DATA}}
   kind: ConfigMap
   metadata:
     labels:
@@ -251,3 +243,16 @@ parameters:
   value: IfNotPresent
 - name: RESOURCE_CLAIM
   required: true
+- name: USERINFO_DATA
+  required: true
+  value: |
+    {
+        "ssh_command": "waiting...",
+        "ssh_user": "waiting...",
+        "ssh_password": "waiting...",
+        "base_domain": "waiting...",
+        "api_ip": "waiting...",
+        "api_fqdn": "waiting...",
+        "ingress_ip": "waiting...",
+        "ingress_fqdn": "waiting..."
+    }
