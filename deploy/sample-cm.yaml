@@ -11,5 +11,5 @@ data:
 kind: ConfigMap
 metadata:
   labels:
-    app: bookbag-0004
-  name: bookbag-0004-userinfo
+    app: bookbag-004
+  name: bookbag-004-userinfo
