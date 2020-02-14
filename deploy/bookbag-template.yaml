@@ -123,8 +123,8 @@ objects:
           volumeMounts:
           - mountPath: /opt/workshop/envvars
             name: envvars
-          - mountPath: /var/run/workshop
-            name: shared
+          - mountPath: /opt/app-root/workshop
+            name: workshop-volume
         - command:
           - /var/run/workshop/start-console.sh
           env:
@@ -181,6 +181,9 @@ objects:
           name: envvars
         - emptyDir: {}
           name: shared
+        - name: workshop-volume
+          persistentVolumeClaim:
+            claimName: workshop-pvc
 - apiVersion: v1
   kind: Service
   metadata:
