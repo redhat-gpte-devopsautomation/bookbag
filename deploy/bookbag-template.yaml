@@ -245,7 +245,7 @@ parameters:
   required: true
 - name: IMAGE
   required: true
-  value: quay.io/gpte-devops-automation/ocp4-disconnected-bookbag:v0.1.6
+  value: image-registry.openshift-image-registry.svc:5000/workshop/ocp4-disconnected-install:latest
 - name: IMAGE_PULL_POLICY
   required: true
   value: IfNotPresent
