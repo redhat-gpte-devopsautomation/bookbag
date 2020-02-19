@@ -1,0 +1,80 @@
+To build an image to use with Bookbag:
+
+. Clone the course content from the repo:
++
+----
+$ git clone https://github.com/pavelanni/ocp4-disconnected-install
+----
+
+. Login to an OpenShift cluster:
++
+----
+$ oc login -u panni <cluster-api-url>
+----
+
+. Create a project for the build or change to an existing project:
++
+----
+$ oc project bookbag-build
+----
+
+. Make sure your cluster's registry has an external default route configured:
++
+----
+$ oc get route -n openshift-image-registry
+NAME            HOST/PORT                                                                                 PATH   SERVICES         PORT    TERMINATION   WILDCARD
+default-route   default-route-openshift-image-registry.apps.cluster-babydev.babydev.dev.open.redhat.com          image-registry   <all>   reencrypt     None
+----
++
+If it doesn't configure it using
++
+----
+$ oc patch configs.imageregistry.operator.openshift.io/cluster --type merge -p '{"spec":{"defaultRoute":true}}'
+----
++
+(you have to be cluster admin for that)
+
+. Change to the course directory:
++
+----
+$ cd ocp4-disconnected-install
+----
+
+. Run the build script:
++
+----
+$ .workshop/scripts/build-workshop.sh
+----
+
+. The resulting image will be pushed to the internal cluster registry. Find it:
++
+----
+$ oc get is
+NAME                        IMAGE REPOSITORY                                                                                                                                    TAGS     UPDATED
+ocp4-disconnected-install   default-route-openshift-image-registry.apps.cluster-babydev.babydev.dev.open.redhat.com/ocp4-disconnected-bookbag-image/ocp4-disconnected-install   latest   2 hours ago
+
+. Check what is the latest tag for this image on Quay
++
+----
+$ skopeo inspect --tls-verify=false docker://quay.io/panni/ocp4-disconnected-install:latest | jq '.RepoTags'
+[
+  "v0.1",
+  "v0.1.1",
+  "v0.1.2",
+  "v0.1.3",
+  "v0.1.4",
+  "v0.1.5",
+  "v0.1.5-volume",
+  "v0.1.7",
+  "latest"
+]
+----
++
+In this case the latest is `v0.1.7`.
+
+. Copy the workshop image from the internal registry to Quay. Don't forget to change the tag to the next version:
++
+----
+$ skopeo copy --src-tls-verify=false --src-creds=openshift:$(oc whoami -t)  --dest-tls-verify=false --dest-creds=panni:<your_encrypted_quay_password> docker://default-route-openshift-image-registry.apps.cluster-babydev.babydev.dev.open.redhat.com/ocp4-disconnected-bookbag-image/ocp4-disconnected-install docker://quay.io/panni/ocp4-disconnected-install:v0.1.8
+----
+
